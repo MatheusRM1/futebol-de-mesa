@@ -8,6 +8,7 @@ extends RigidBody2D
 @export var e_jogador_humano: bool = true
 @export var mostrar_linha_arraste: bool = true
 
+var pode_jogar: bool = true
 var arrastando: bool = false
 var posicao_inicial_arraste: Vector2 = Vector2.ZERO
 var offset_mouse: Vector2 = Vector2.ZERO
@@ -31,7 +32,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not e_jogador_humano:
+	if not e_jogador_humano or not pode_jogar:
 		return
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -42,6 +43,9 @@ func _input(event: InputEvent) -> void:
 
 
 func _tentar_iniciar_arraste() -> void:
+	if not pode_jogar:
+		return
+		
 	var mouse_pos: Vector2 = get_global_mouse_position()
 
 	var space_state = get_world_2d().direct_space_state
@@ -63,6 +67,11 @@ func _tentar_iniciar_arraste() -> void:
 func _soltar_jogador() -> void:
 	if not arrastando:
 		return
+	
+	if not pode_jogar:
+		arrastando = false
+		freeze = false
+		return
 
 	arrastando = false
 
@@ -77,6 +86,7 @@ func _soltar_jogador() -> void:
 	var forca: Vector2 = vetor_arraste * multiplicador
 
 	if distancia > 5.0:
+		pode_jogar = false
 		set_deferred("freeze", false)
 		set_deferred("linear_velocity", forca / mass)
 		jogador_soltou.emit(self)
