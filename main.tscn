@@ -1,62 +1,77 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgv8f0hp4otwn"]
+[gd_scene load_steps=12 format=3 uid="uid://dgv8f0hp4otwn"]
 
-[ext_resource type="Script" uid="uid://cqm4q8kn76dsx" path="res://character_body_2d.gd" id="1_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://cl4jvwjr4sv5x" path="res://assets/Preview/10.png" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://bhlk5v0ytg58o" path="res://rigid_body_2d.gd" id="2_h2yge"]
 [ext_resource type="Texture2D" uid="uid://lwnve6dv0skw" path="res://assets/Field/Only Field.png" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://5jqos5t586by" path="res://bola.gd" id="4_bola"]
+[ext_resource type="Texture2D" uid="uid://sgni2r1u0b4" path="res://assets/ball_red_large.png" id="5_lquwl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
-size = Vector2(129, 128)
+[sub_resource type="CircleShape2D" id="CircleShape2D_1bvp3"]
+radius = 80.00625
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
-size = Vector2(1909, 20)
+size = Vector2(1504, 35)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
 size = Vector2(851, 25.000015)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
-size = Vector2(20, 1499.5)
+size = Vector2(20, 1547.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
 size = Vector2(44, 842.5)
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_bola"]
+radius = 42.047592
+
+[node name="Campo" type="Node2D"]
 position = Vector2(67, -66)
 
 [node name="Campo" type="Sprite2D" parent="."]
-position = Vector2(892.00006, 603.00006)
+position = Vector2(894, 603.00006)
 scale = Vector2(0.19160004, 0.142669)
 texture = ExtResource("3_h2yge")
 
-[node name="Jogador1" type="CharacterBody2D" parent="."]
-position = Vector2(0, -3)
-script = ExtResource("1_0xm2m")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Jogador1"]
-position = Vector2(639, 584)
-shape = SubResource("RectangleShape2D_1bvp3")
+[node name="Jogador1" type="RigidBody2D" parent="."]
+script = ExtResource("2_h2yge")
 
 [node name="Sprite2D" type="Sprite2D" parent="Jogador1"]
-position = Vector2(640.00006, 585)
-scale = Vector2(0.055057622, 0.054987215)
+position = Vector2(493, 595.00006)
+scale = Vector2(0.0683952, 0.067135625)
 texture = ExtResource("2_0xm2m")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Jogador1"]
+position = Vector2(493, 594)
+shape = SubResource("CircleShape2D_1bvp3")
+
+[node name="Paredes" type="StaticBody2D" parent="."]
 position = Vector2(-31, 1060)
 
-[node name="Chao" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(972.5, -25)
+[node name="Chao" type="CollisionShape2D" parent="Paredes"]
+position = Vector2(927, -17.5)
 shape = SubResource("RectangleShape2D_h2yge")
 
-[node name="GolEsquerdo" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="GolEsquerdo" type="CollisionShape2D" parent="Paredes"]
 position = Vector2(159.49998, -457.5)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_lquwl")
 
-[node name="Teto" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(923, -891)
+[node name="Teto" type="CollisionShape2D" parent="Paredes"]
+position = Vector2(947.125, -889)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_7mycd")
 
-[node name="GolDireito" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="GolDireito" type="CollisionShape2D" parent="Paredes"]
 position = Vector2(1702, -466.25)
 shape = SubResource("RectangleShape2D_272bh")
+
+[node name="Bola" type="RigidBody2D" parent="." groups=["bola"]]
+position = Vector2(774, 605)
+script = ExtResource("4_bola")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bola"]
+scale = Vector2(1.3057804, 1.3253132)
+texture = ExtResource("5_lquwl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bola"]
+shape = SubResource("CircleShape2D_bola")
