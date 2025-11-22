@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dgv8f0hp4otwn"]
+[gd_scene load_steps=18 format=3 uid="uid://dgv8f0hp4otwn"]
 
 [ext_resource type="Texture2D" uid="uid://cl4jvwjr4sv5x" path="res://assets/Preview/10.png" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://bhlk5v0ytg58o" path="res://jogador_1.gd" id="2_272bh"]
@@ -22,13 +22,19 @@ radius = 42.047592
 size = Vector2(1504, 35)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
-size = Vector2(851, 25.000015)
+size = Vector2(317, 25.000015)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
 size = Vector2(20, 1547.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
-size = Vector2(28, 882.5)
+size = Vector2(18, 326.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gol1"]
+size = Vector2(28, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gol2"]
+size = Vector2(30, 202)
 
 [node name="Campo" type="Node2D"]
 position = Vector2(67, -66)
@@ -40,6 +46,8 @@ texture = ExtResource("3_h2yge")
 
 [node name="GerenciadorTurnos" type="Node2D" parent="."]
 script = ExtResource("8_turnos")
+area_gol_jogador1 = NodePath("../AreaGolJogador1")
+area_gol_jogador2 = NodePath("../AreaGolJogador2")
 
 [node name="Jogador1" type="RigidBody2D" parent="GerenciadorTurnos"]
 script = ExtResource("2_272bh")
@@ -66,7 +74,7 @@ position = Vector2(1186, 598)
 shape = SubResource("CircleShape2D_kek77")
 
 [node name="Bola" type="RigidBody2D" parent="GerenciadorTurnos" groups=["bola"]]
-position = Vector2(774, 605)
+position = Vector2(230, 597)
 script = ExtResource("4_bola")
 
 [node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Bola"]
@@ -84,7 +92,7 @@ position = Vector2(927, -17.5)
 shape = SubResource("RectangleShape2D_h2yge")
 
 [node name="GolEsquerdo" type="CollisionShape2D" parent="Paredes"]
-position = Vector2(159.49998, -457.5)
+position = Vector2(159.5, -724.5)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_lquwl")
 
@@ -94,5 +102,32 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_7mycd")
 
 [node name="GolDireito" type="CollisionShape2D" parent="Paredes"]
-position = Vector2(1694, -446.25)
+position = Vector2(1689, -724.25)
 shape = SubResource("RectangleShape2D_272bh")
+
+[node name="AreaGolJogador1" type="Area2D" parent="."]
+position = Vector2(36, 603)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaGolJogador1"]
+position = Vector2(89, -1)
+shape = SubResource("RectangleShape2D_gol1")
+
+[node name="AreaGolJogador2" type="Area2D" parent="."]
+position = Vector2(1626, 603)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaGolJogador2"]
+position = Vector2(32, -5)
+shape = SubResource("RectangleShape2D_gol2")
+
+[node name="Placar" type="Label" parent="."]
+offset_left = 813.0
+offset_top = 90.0
+offset_right = 981.0
+offset_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Placar: 0 x 0"
+horizontal_alignment = 1
+vertical_alignment = 1
