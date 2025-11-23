@@ -61,17 +61,37 @@ texture = ExtResource("3_h2yge")
 [node name="GerenciadorTurnos" type="Node2D" parent="."]
 script = ExtResource("8_turnos")
 
-[node name="Jogador1" type="RigidBody2D" parent="GerenciadorTurnos"]
-position = Vector2(-20, 18)
+[node name="Jogador1_2" type="RigidBody2D" parent="GerenciadorTurnos"]
+position = Vector2(349, 392)
 script = ExtResource("2_272bh")
 
-[node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Jogador1"]
-position = Vector2(493, 595.00006)
+[node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Jogador1_2"]
 scale = Vector2(0.0683952, 0.067135625)
 texture = ExtResource("2_0xm2m")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GerenciadorTurnos/Jogador1"]
-position = Vector2(493, 594)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GerenciadorTurnos/Jogador1_2"]
+shape = SubResource("CircleShape2D_1bvp3")
+
+[node name="Jogador1_3" type="RigidBody2D" parent="GerenciadorTurnos"]
+position = Vector2(350, 800)
+script = ExtResource("2_272bh")
+
+[node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Jogador1_3"]
+scale = Vector2(0.0683952, 0.067135625)
+texture = ExtResource("2_0xm2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GerenciadorTurnos/Jogador1_3"]
+shape = SubResource("CircleShape2D_1bvp3")
+
+[node name="Jogador1_4" type="RigidBody2D" parent="GerenciadorTurnos"]
+position = Vector2(618, 594)
+script = ExtResource("2_272bh")
+
+[node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Jogador1_4"]
+scale = Vector2(0.0683952, 0.067135625)
+texture = ExtResource("2_0xm2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GerenciadorTurnos/Jogador1_4"]
 shape = SubResource("CircleShape2D_1bvp3")
 
 [node name="Jogador2" type="RigidBody2D" parent="GerenciadorTurnos"]
@@ -86,8 +106,30 @@ texture = ExtResource("7_5vw27")
 position = Vector2(1186, 598)
 shape = SubResource("CircleShape2D_kek77")
 
+[node name="Jogador2_2" type="RigidBody2D" parent="GerenciadorTurnos"]
+position = Vector2(1450, 400)
+script = ExtResource("6_272bh")
+
+[node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Jogador2_2"]
+scale = Vector2(0.18846379, 0.18505333)
+texture = ExtResource("7_5vw27")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GerenciadorTurnos/Jogador2_2"]
+shape = SubResource("CircleShape2D_kek77")
+
+[node name="Jogador2_3" type="RigidBody2D" parent="GerenciadorTurnos"]
+position = Vector2(1450, 800)
+script = ExtResource("6_272bh")
+
+[node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Jogador2_3"]
+scale = Vector2(0.18846379, 0.18505333)
+texture = ExtResource("7_5vw27")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GerenciadorTurnos/Jogador2_3"]
+shape = SubResource("CircleShape2D_kek77")
+
 [node name="Bola" type="RigidBody2D" parent="GerenciadorTurnos" groups=["bola"]]
-position = Vector2(220, 610)
+position = Vector2(275, 600)
 script = ExtResource("4_bola")
 
 [node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Bola"]
@@ -149,12 +191,22 @@ position = Vector2(55, -1.5)
 shape = SubResource("RectangleShape2D_gol2")
 
 [node name="Placar" type="Label" parent="."]
-offset_left = 813.0
-offset_top = 90.0
-offset_right = 981.0
-offset_bottom = 124.0
+offset_left = 766.0
+offset_top = 80.0
+offset_right = 1028.0
+offset_bottom = 148.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 40
 text = "Placar: 0 x 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Vencedor" type="Label" parent="."]
+offset_left = 659.0
+offset_top = 245.0
+offset_right = 1159.0
+offset_bottom = 345.0
+theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1

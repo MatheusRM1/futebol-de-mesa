@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export var forca_maxima: float = 2000.0
+@export var forca_maxima: float = 4000.0
 @export var distancia_maxima_arraste: float = 200.0
 @export var friccao: float = 2.5
 @export var quique: float = 0.6
@@ -13,7 +13,6 @@ var arrastando: bool = false
 var posicao_inicial_arraste: Vector2 = Vector2.ZERO
 var offset_mouse: Vector2 = Vector2.ZERO
 var tempo_inicio_arraste: float = 0.0
-var linha_visual: Line2D = null
 
 signal jogador_tocou_bola(jogador)
 signal jogador_soltou(jogador)
@@ -71,11 +70,14 @@ func _soltar_jogador() -> void:
 	if not pode_jogar:
 		arrastando = false
 		freeze = false
+		global_position = posicao_inicial_arraste
 		return
 
 	arrastando = false
 
-	var vetor_arraste: Vector2 = posicao_inicial_arraste - global_position
+	var mouse_pos: Vector2 = get_global_mouse_position()
+	var posicao_arraste: Vector2 = mouse_pos
+	var vetor_arraste: Vector2 = posicao_inicial_arraste - posicao_arraste
 	var distancia: float = vetor_arraste.length()
 
 	if distancia > distancia_maxima_arraste:
@@ -84,6 +86,8 @@ func _soltar_jogador() -> void:
 
 	var multiplicador: float = forca_maxima / distancia_maxima_arraste
 	var forca: Vector2 = vetor_arraste * multiplicador
+
+	global_position = posicao_inicial_arraste
 
 	if distancia > 5.0:
 		pode_jogar = false
@@ -99,21 +103,40 @@ func _physics_process(_delta: float) -> void:
 
 
 func _process(_delta: float) -> void:
+	queue_redraw()
+	
+func _draw() -> void:
 	if arrastando:
 		var mouse_pos: Vector2 = get_global_mouse_position()
-		var posicao_desejada: Vector2 = mouse_pos + offset_mouse
-
-		var vetor_arraste: Vector2 = posicao_inicial_arraste - posicao_desejada
+		var vetor_arraste: Vector2 = global_position - mouse_pos
 
 		if vetor_arraste.length() > distancia_maxima_arraste:
-			var direcao: Vector2 = vetor_arraste.normalized()
-			posicao_desejada = posicao_inicial_arraste - direcao * distancia_maxima_arraste
+			vetor_arraste = vetor_arraste.normalized() * distancia_maxima_arraste
 
-		global_position = posicao_desejada
-
-	else:
-		if linha_visual:
-			linha_visual.visible = false
+		var raio_circulo = 100.0
+		draw_arc(Vector2.ZERO, raio_circulo, 0, TAU, 64, Color(1, 1, 1, 0.5), 3.0)
+		
+		if vetor_arraste.length() > 5.0:
+			var direcao = vetor_arraste.normalized()
+			var comprimento = min(vetor_arraste.length(), distancia_maxima_arraste)
+			var largura_seta = 15.0
+			var tamanho_ponta = 25.0
+			
+			var ponta = direcao * comprimento
+			var base = Vector2.ZERO
+			var perpendicular = Vector2(-direcao.y, direcao.x)
+			
+			var pontos = PackedVector2Array([
+				base + perpendicular * largura_seta / 2,
+				base - perpendicular * largura_seta / 2,
+				ponta - direcao * tamanho_ponta - perpendicular * largura_seta / 2,
+				ponta - direcao * tamanho_ponta - perpendicular * largura_seta,
+				ponta,
+				ponta - direcao * tamanho_ponta + perpendicular * largura_seta,
+				ponta - direcao * tamanho_ponta + perpendicular * largura_seta / 2
+			])
+			
+			draw_colored_polygon(pontos, Color(1, 1, 0, 0.7))
 
 
 func _on_body_entered(body: Node) -> void:
