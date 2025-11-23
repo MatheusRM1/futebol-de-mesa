@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export var forca_maxima: float = 2000.0
+@export var forca_maxima: float = 4000.0
 @export var distancia_maxima_arraste: float = 200.0
 @export var friccao: float = 2.5
 @export var quique: float = 0.6

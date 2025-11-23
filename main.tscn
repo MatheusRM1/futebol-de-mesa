@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://bhlk5v0ytg58o" path="res://jogador_1.gd" id="2_272bh"]
 [ext_resource type="Texture2D" uid="uid://lwnve6dv0skw" path="res://assets/Field/Only Field.png" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://5jqos5t586by" path="res://bola.gd" id="4_bola"]
-[ext_resource type="Texture2D" uid="uid://sgni2r1u0b4" path="res://assets/ball_red_large.png" id="5_lquwl"]
 [ext_resource type="Script" uid="uid://blh10m0s61f7t" path="res://jogador_2.gd" id="6_272bh"]
 [ext_resource type="Texture2D" uid="uid://co8lcwquhw6yq" path="res://assets/Saint Bari (Visitor Team)/10.png" id="7_5vw27"]
+[ext_resource type="Texture2D" uid="uid://c82r447g6l6j2" path="res://assets/pngfind.com-bola-de-futebol-png-4247785.png" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://c8oqj64qsobg2" path="res://gerenciador_turnos.gd" id="8_turnos"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1bvp3"]
@@ -62,7 +62,7 @@ texture = ExtResource("3_h2yge")
 script = ExtResource("8_turnos")
 
 [node name="Jogador1_2" type="RigidBody2D" parent="GerenciadorTurnos"]
-position = Vector2(349, 392)
+position = Vector2(345, 404)
 script = ExtResource("2_272bh")
 
 [node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Jogador1_2"]
@@ -73,7 +73,7 @@ texture = ExtResource("2_0xm2m")
 shape = SubResource("CircleShape2D_1bvp3")
 
 [node name="Jogador1_3" type="RigidBody2D" parent="GerenciadorTurnos"]
-position = Vector2(350, 800)
+position = Vector2(341, 771)
 script = ExtResource("2_272bh")
 
 [node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Jogador1_3"]
@@ -95,6 +95,7 @@ texture = ExtResource("2_0xm2m")
 shape = SubResource("CircleShape2D_1bvp3")
 
 [node name="Jogador2" type="RigidBody2D" parent="GerenciadorTurnos"]
+position = Vector2(-32, -2)
 script = ExtResource("6_272bh")
 
 [node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Jogador2"]
@@ -107,7 +108,7 @@ position = Vector2(1186, 598)
 shape = SubResource("CircleShape2D_kek77")
 
 [node name="Jogador2_2" type="RigidBody2D" parent="GerenciadorTurnos"]
-position = Vector2(1450, 400)
+position = Vector2(1431, 407)
 script = ExtResource("6_272bh")
 
 [node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Jogador2_2"]
@@ -118,7 +119,7 @@ texture = ExtResource("7_5vw27")
 shape = SubResource("CircleShape2D_kek77")
 
 [node name="Jogador2_3" type="RigidBody2D" parent="GerenciadorTurnos"]
-position = Vector2(1450, 800)
+position = Vector2(1430, 772)
 script = ExtResource("6_272bh")
 
 [node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Jogador2_3"]
@@ -129,14 +130,16 @@ texture = ExtResource("7_5vw27")
 shape = SubResource("CircleShape2D_kek77")
 
 [node name="Bola" type="RigidBody2D" parent="GerenciadorTurnos" groups=["bola"]]
-position = Vector2(275, 600)
+position = Vector2(834, 648)
 script = ExtResource("4_bola")
 
 [node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Bola"]
-scale = Vector2(1.3057804, 1.3253132)
-texture = ExtResource("5_lquwl")
+position = Vector2(60.085144, -46.90094)
+scale = Vector2(0.19352971, 0.19642468)
+texture = ExtResource("8_5vw27")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GerenciadorTurnos/Bola"]
+position = Vector2(61, -48)
 shape = SubResource("CircleShape2D_bola")
 
 [node name="Paredes" type="StaticBody2D" parent="."]

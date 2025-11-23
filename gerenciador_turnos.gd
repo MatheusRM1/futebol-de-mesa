@@ -25,6 +25,7 @@ signal gol_marcado(jogador: int, placar_j1: int, placar_j2: int)
 
 var reset_em_andamento: bool = false
 var jogo_finalizado: bool = false
+var processando_gol: bool = false
 
 func _on_jogador1_soltou_signal(_jogador) -> void:
 	_on_jogador_soltou(1)
@@ -143,10 +144,14 @@ func _tudo_parado() -> bool:
 	return bola_parada and todos_jogadores_parados
 
 func _on_gol_body_entered(jogador: int, body: Node2D) -> void:
-	if body == bola:
+	if body == bola and not processando_gol:
 		_marcar_gol(jogador)
 
 func _marcar_gol(jogador_marcou: int) -> void:
+	if processando_gol:
+		return
+	
+	processando_gol = true
 	if jogador_marcou == 1:
 		gols_jogador1 += 1
 	else:
@@ -163,6 +168,8 @@ func _marcar_gol(jogador_marcou: int) -> void:
 			_iniciar_turno_jogador2()
 		else:
 			_iniciar_turno_jogador1()
+	
+	processando_gol = false
 
 func _resetar_posicoes(final_do_jogo: bool = false) -> void:
 	reset_em_andamento = true
