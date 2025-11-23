@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dgv8f0hp4otwn"]
+[gd_scene load_steps=22 format=3 uid="uid://dgv8f0hp4otwn"]
 
 [ext_resource type="Texture2D" uid="uid://cl4jvwjr4sv5x" path="res://assets/Preview/10.png" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://bhlk5v0ytg58o" path="res://jogador_1.gd" id="2_272bh"]
@@ -28,7 +28,7 @@ size = Vector2(322, 79.00001)
 size = Vector2(20, 1547.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_272bh"]
-size = Vector2(18, 326.5)
+size = Vector2(70, 326.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
 size = Vector2(83.5, 349.25)
@@ -37,11 +37,18 @@ size = Vector2(83.5, 349.25)
 a = Vector2(86, -558)
 b = Vector2(86, -357)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kek77"]
+size = Vector2(73, 345.5)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4c57u"]
+a = Vector2(1754, -563)
+b = Vector2(1753, -353)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gol1"]
 size = Vector2(81, 200)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gol2"]
-size = Vector2(30, 202)
+size = Vector2(76, 209)
 
 [node name="Campo" type="Node2D"]
 position = Vector2(67, -66)
@@ -55,6 +62,7 @@ texture = ExtResource("3_h2yge")
 script = ExtResource("8_turnos")
 
 [node name="Jogador1" type="RigidBody2D" parent="GerenciadorTurnos"]
+position = Vector2(-20, 18)
 script = ExtResource("2_272bh")
 
 [node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Jogador1"]
@@ -79,7 +87,7 @@ position = Vector2(1186, 598)
 shape = SubResource("CircleShape2D_kek77")
 
 [node name="Bola" type="RigidBody2D" parent="GerenciadorTurnos" groups=["bola"]]
-position = Vector2(230, 597)
+position = Vector2(220, 610)
 script = ExtResource("4_bola")
 
 [node name="Sprite2D" type="Sprite2D" parent="GerenciadorTurnos/Bola"]
@@ -107,7 +115,7 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_7mycd")
 
 [node name="GolDireito" type="CollisionShape2D" parent="Paredes"]
-position = Vector2(1689, -724.25)
+position = Vector2(1715, -724.25)
 shape = SubResource("RectangleShape2D_272bh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Paredes"]
@@ -116,6 +124,13 @@ shape = SubResource("RectangleShape2D_5vw27")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Paredes"]
 shape = SubResource("SegmentShape2D_kek77")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Paredes"]
+position = Vector2(1713.5, -179.75)
+shape = SubResource("RectangleShape2D_kek77")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Paredes"]
+shape = SubResource("SegmentShape2D_4c57u")
 
 [node name="AreaGolJogador1" type="Area2D" parent="."]
 position = Vector2(36, 603)
@@ -130,7 +145,7 @@ position = Vector2(1626, 603)
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaGolJogador2"]
-position = Vector2(32, -5)
+position = Vector2(55, -1.5)
 shape = SubResource("RectangleShape2D_gol2")
 
 [node name="Placar" type="Label" parent="."]

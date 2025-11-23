@@ -25,10 +25,10 @@ signal gol_marcado(jogador: int, placar_j1: int, placar_j2: int)
 
 var reset_em_andamento: bool = false
 
-func _on_jogador1_soltou_signal() -> void:
+func _on_jogador1_soltou_signal(_jogador) -> void:
 	_on_jogador_soltou(1)
 
-func _on_jogador2_soltou_signal() -> void:
+func _on_jogador2_soltou_signal(_jogador) -> void:
 	_on_jogador_soltou(2)
 
 func _on_gol_jogador1_body_entered_signal(body: Node2D) -> void:
@@ -74,7 +74,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if turno_atual == Turno.AGUARDANDO:
 		timer_espera -= delta
-		timer_espera -= delta
 		if timer_espera <= 0 and _tudo_parado():
 			_proximo_turno()
 
@@ -93,7 +92,7 @@ func _iniciar_turno_jogador2() -> void:
 	if jogador2:
 		jogador2.set("pode_jogar", true)
 		await get_tree().create_timer(0.5).timeout
-		if jogador2 and jogador2.has_method("executar_jogada_ia"):
+		if jogador2.has_method("executar_jogada_ia"):
 			jogador2.call("executar_jogada_ia")
 	turno_mudou.emit(Turno.JOGADOR2)
 
